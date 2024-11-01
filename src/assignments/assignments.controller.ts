@@ -32,4 +32,17 @@ export class AssignmentsController {
     }
     return true; // It is a prime number
   }
+
+  @Get('factorial/:number')
+  calculateFactorial(@Param('number') number: string): { factorial: number } {
+    const num = parseInt(number, 10);
+    return { factorial: this.factorial(num) };
+  }
+
+  private factorial(num: number): number {
+    if (num < 0) {
+      throw new Error('Factorial is not defined for negative numbers');
+    }
+    return num === 0 ? 1 : num * this.factorial(num - 1);
+  }
 }
